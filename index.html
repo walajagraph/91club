@@ -1,466 +1,553 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>91 Club — Premium Access</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>91 Club — Premium Access</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  :root {
-    --red: #e11d2e;
-    --red-dark: #a30f1e;
-    --red-light: #ff3b4e;
-    --white: #ffffff;
-    --off-white: #fdf5f6;
-    --text-dark: #1a1a1f;
-    --text-muted: #7a7a85;
-  }
+        :root {
+            --red: #e11d2e;
+            --red-dark: #a30f1e;
+            --red-light: #ff3b4e;
+            --white: #ffffff;
+            --off-white: #fdf5f6;
+            --text-dark: #1a1a1f;
+            --text-muted: #7a7a85;
+        }
 
-  body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background:
-      radial-gradient(circle at 20% 15%, rgba(225, 29, 46, 0.55) 0%, transparent 45%),
-      radial-gradient(circle at 85% 85%, rgba(255, 59, 78, 0.40) 0%, transparent 50%),
-      linear-gradient(145deg, #14060a 0%, #2a0a12 45%, #0d0305 100%);
-    position: relative;
-    overflow: hidden;
-  }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background:
+                radial-gradient(circle at 20% 15%, rgba(225, 29, 46, 0.55) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(255, 59, 78, 0.40) 0%, transparent 50%),
+                linear-gradient(145deg, #14060a 0%, #2a0a12 45%, #0d0305 100%);
+            position: relative;
+            overflow: hidden;
+        }
 
-  /* subtle grid texture */
-  body::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-    background-size: 46px 46px;
-    pointer-events: none;
-    mask-image: radial-gradient(circle at center, black 10%, transparent 78%);
-    -webkit-mask-image: radial-gradient(circle at center, black 10%, transparent 78%);
-  }
+        /* subtle grid texture */
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+            background-size: 46px 46px;
+            pointer-events: none;
+            mask-image: radial-gradient(circle at center, black 10%, transparent 78%);
+            -webkit-mask-image: radial-gradient(circle at center, black 10%, transparent 78%);
+        }
 
-  /* glow blob */
-  .glow {
-    position: absolute;
-    width: 520px;
-    height: 520px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(225, 29, 46, 0.45) 0%, transparent 68%);
-    filter: blur(70px);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    animation: pulse 5s ease-in-out infinite;
-  }
+        /* glow blob */
+        .glow {
+            position: absolute;
+            width: 520px;
+            height: 520px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(225, 29, 46, 0.45) 0%, transparent 68%);
+            filter: blur(70px);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            animation: pulse 5s ease-in-out infinite;
+        }
 
-  @keyframes pulse {
-    0%, 100% { opacity: 0.55; transform: translate(-50%, -50%) scale(1); }
-    50%      { opacity: 0.9;  transform: translate(-50%, -50%) scale(1.12); }
-  }
+        @keyframes pulse {
 
-  /* ---------- CARD ---------- */
-  .card {
-    position: relative;
-    width: 100%;
-    max-width: 400px;
-    background: var(--white);
-    border-radius: 26px;
-    padding: 40px 30px 0;
-    text-align: center;
-    box-shadow:
-      0 0 0 1px rgba(225, 29, 46, 0.18),
-      0 30px 70px -18px rgba(0, 0, 0, 0.75),
-      0 0 90px -20px rgba(225, 29, 46, 0.65);
-    overflow: hidden;
-    animation: cardIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-    z-index: 2;
-  }
+            0%,
+            100% {
+                opacity: 0.55;
+                transform: translate(-50%, -50%) scale(1);
+            }
 
-  @keyframes cardIn {
-    from { opacity: 0; transform: translateY(28px) scale(0.96); }
-    to   { opacity: 1; transform: translateY(0) scale(1); }
-  }
+            50% {
+                opacity: 0.9;
+                transform: translate(-50%, -50%) scale(1.12);
+            }
+        }
 
-  /* red top strip */
-  .card::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 6px;
-    background: linear-gradient(90deg, var(--red-dark), var(--red), var(--red-light), var(--red), var(--red-dark));
-    background-size: 220% 100%;
-    animation: slide 3.5s linear infinite;
-  }
+        /* ---------- CARD ---------- */
+        .card {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+            background: var(--white);
+            border-radius: 26px;
+            padding: 40px 30px 0;
+            text-align: center;
+            box-shadow:
+                0 0 0 1px rgba(225, 29, 46, 0.18),
+                0 30px 70px -18px rgba(0, 0, 0, 0.75),
+                0 0 90px -20px rgba(225, 29, 46, 0.65);
+            overflow: hidden;
+            animation: cardIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+            z-index: 2;
+        }
 
-  @keyframes slide {
-    to { background-position: -220% 0; }
-  }
+        @keyframes cardIn {
+            from {
+                opacity: 0;
+                transform: translateY(28px) scale(0.96);
+            }
 
-  /* diagonal red sheen in corner */
-  .card::after {
-    content: "";
-    position: absolute;
-    top: -70px;
-    right: -70px;
-    width: 190px;
-    height: 190px;
-    background: linear-gradient(135deg, rgba(225, 29, 46, 0.10), rgba(225, 29, 46, 0));
-    border-radius: 50%;
-    pointer-events: none;
-  }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
 
-  /* ---------- LOGO ---------- */
-  .logo {
-    width: 92px;
-    height: 92px;
-    margin: 0 auto 22px;
-    border-radius: 24px;
-    background: linear-gradient(150deg, var(--red-light), var(--red) 45%, var(--red-dark));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    box-shadow:
-      0 12px 30px -8px rgba(225, 29, 46, 0.75),
-      inset 0 2px 0 rgba(255, 255, 255, 0.35),
-      inset 0 -3px 8px rgba(0, 0, 0, 0.22);
-  }
+        /* red top strip */
+        .card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--red-dark), var(--red), var(--red-light), var(--red), var(--red-dark));
+            background-size: 220% 100%;
+            animation: slide 3.5s linear infinite;
+        }
 
-  /* white ring */
-  .logo::before {
-    content: "";
-    position: absolute;
-    inset: -7px;
-    border-radius: 30px;
-    border: 2px solid rgba(225, 29, 46, 0.22);
-  }
+        @keyframes slide {
+            to {
+                background-position: -220% 0;
+            }
+        }
 
-  .logo span {
-    font-size: 34px;
-    font-weight: 900;
-    color: var(--white);
-    letter-spacing: -2px;
-    line-height: 1;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.28);
-  }
+        /* diagonal red sheen in corner */
+        .card::after {
+            content: "";
+            position: absolute;
+            top: -70px;
+            right: -70px;
+            width: 190px;
+            height: 190px;
+            background: linear-gradient(135deg, rgba(225, 29, 46, 0.10), rgba(225, 29, 46, 0));
+            border-radius: 50%;
+            pointer-events: none;
+        }
 
-  .logo small {
-    position: absolute;
-    bottom: 14px;
-    font-size: 9px;
-    font-weight: 800;
-    letter-spacing: 3px;
-    color: rgba(255, 255, 255, 0.9);
-    text-transform: uppercase;
-  }
+        /* ---------- LOGO ---------- */
+        .logo {
+            width: 92px;
+            height: 92px;
+            margin: 0 auto 22px;
+            border-radius: 24px;
+            background: linear-gradient(150deg, var(--red-light), var(--red) 45%, var(--red-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow:
+                0 12px 30px -8px rgba(225, 29, 46, 0.75),
+                inset 0 2px 0 rgba(255, 255, 255, 0.35),
+                inset 0 -3px 8px rgba(0, 0, 0, 0.22);
+        }
 
-  /* ---------- BADGE ---------- */
-  .badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    background: linear-gradient(135deg, #fff0f2, #ffe3e7);
-    color: var(--red);
-    border: 1px solid rgba(225, 29, 46, 0.28);
-    font-size: 10.5px;
-    font-weight: 800;
-    letter-spacing: 1.6px;
-    text-transform: uppercase;
-    padding: 8px 16px;
-    border-radius: 100px;
-    margin-bottom: 20px;
-  }
+        /* white ring */
+        .logo::before {
+            content: "";
+            position: absolute;
+            inset: -7px;
+            border-radius: 30px;
+            border: 2px solid rgba(225, 29, 46, 0.22);
+        }
 
-  .badge .dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--red);
-    box-shadow: 0 0 0 0 rgba(225, 29, 46, 0.7);
-    animation: blink 1.8s ease-out infinite;
-  }
+        .logo span {
+            font-size: 34px;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: -2px;
+            line-height: 1;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.28);
+        }
 
-  @keyframes blink {
-    0%   { box-shadow: 0 0 0 0 rgba(225, 29, 46, 0.65); }
-    70%  { box-shadow: 0 0 0 9px rgba(225, 29, 46, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(225, 29, 46, 0); }
-  }
+        .logo small {
+            position: absolute;
+            bottom: 14px;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: rgba(255, 255, 255, 0.9);
+            text-transform: uppercase;
+        }
 
-  /* ---------- TEXT ---------- */
-  h1 {
-    font-size: 27px;
-    font-weight: 800;
-    color: var(--text-dark);
-    line-height: 1.25;
-    letter-spacing: -0.6px;
-    margin-bottom: 10px;
-  }
+        /* ---------- BADGE ---------- */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: linear-gradient(135deg, #fff0f2, #ffe3e7);
+            color: var(--red);
+            border: 1px solid rgba(225, 29, 46, 0.28);
+            font-size: 10.5px;
+            font-weight: 800;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+            padding: 8px 16px;
+            border-radius: 100px;
+            margin-bottom: 20px;
+        }
 
-  h1 em {
-    font-style: normal;
-    color: var(--red);
-  }
+        .badge .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--red);
+            box-shadow: 0 0 0 0 rgba(225, 29, 46, 0.7);
+            animation: blink 1.8s ease-out infinite;
+        }
 
-  .sub {
-    font-size: 13.5px;
-    color: var(--text-muted);
-    line-height: 1.6;
-    max-width: 280px;
-    margin: 0 auto 26px;
-  }
+        @keyframes blink {
+            0% {
+                box-shadow: 0 0 0 0 rgba(225, 29, 46, 0.65);
+            }
 
-  /* ---------- DIVIDER ---------- */
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 22px;
-  }
+            70% {
+                box-shadow: 0 0 0 9px rgba(225, 29, 46, 0);
+            }
 
-  .divider::before,
-  .divider::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(225, 29, 46, 0.25), transparent);
-  }
+            100% {
+                box-shadow: 0 0 0 0 rgba(225, 29, 46, 0);
+            }
+        }
 
-  .divider span {
-    font-size: 9.5px;
-    font-weight: 700;
-    letter-spacing: 1.8px;
-    color: #b9b9c4;
-    text-transform: uppercase;
-  }
+        /* ---------- TEXT ---------- */
+        h1 {
+            font-size: 27px;
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.25;
+            letter-spacing: -0.6px;
+            margin-bottom: 10px;
+        }
 
-  /* ---------- BUTTON ---------- */
-  .btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    padding: 17px;
-    border: none;
-    border-radius: 16px;
-    font-family: inherit;
-    font-size: 14.5px;
-    font-weight: 800;
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
-    color: var(--white);
-    cursor: pointer;
-    text-decoration: none;
-    background: linear-gradient(135deg, var(--red-light) 0%, var(--red) 50%, var(--red-dark) 100%);
-    background-size: 200% 200%;
-    box-shadow:
-      0 14px 28px -10px rgba(225, 29, 46, 0.85),
-      inset 0 1px 0 rgba(255, 255, 255, 0.32),
-      inset 0 -2px 6px rgba(0, 0, 0, 0.2);
-    transition: transform 0.18s ease, box-shadow 0.25s ease, background-position 0.5s ease;
-    position: relative;
-    overflow: hidden;
-  }
+        h1 em {
+            font-style: normal;
+            color: var(--red);
+        }
 
-  .btn::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 60%;
-    height: 100%;
-    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.42), transparent);
-    transition: left 0.6s ease;
-  }
+        .sub {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            max-width: 280px;
+            margin: 0 auto 26px;
+        }
 
-  .btn:hover {
-    transform: translateY(-2px);
-    background-position: 100% 50%;
-    box-shadow:
-      0 20px 36px -10px rgba(225, 29, 46, 0.95),
-      inset 0 1px 0 rgba(255, 255, 255, 0.35);
-  }
+        /* ---------- DIVIDER ---------- */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
 
-  .btn:hover::after { left: 130%; }
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(225, 29, 46, 0.25), transparent);
+        }
 
-  .btn:active { transform: translateY(0) scale(0.985); }
+        .divider span {
+            font-size: 9.5px;
+            font-weight: 700;
+            letter-spacing: 1.8px;
+            color: #b9b9c4;
+            text-transform: uppercase;
+        }
 
- /* ---------- RIPPLE EFFECT ---------- */
-.btn .ripple {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.55);
-  transform: scale(0);
-  animation: rippleAnim 0.7s ease-out;
-  pointer-events: none;
-}
+        /* ---------- BUTTON ---------- */
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 17px;
+            border: none;
+            border-radius: 16px;
+            font-family: inherit;
+            font-size: 14.5px;
+            font-weight: 800;
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            color: var(--white);
+            cursor: pointer;
+            text-decoration: none;
+            background: linear-gradient(135deg, var(--red-light) 0%, var(--red) 50%, var(--red-dark) 100%);
+            background-size: 200% 200%;
+            box-shadow:
+                0 14px 28px -10px rgba(225, 29, 46, 0.85),
+                inset 0 1px 0 rgba(255, 255, 255, 0.32),
+                inset 0 -2px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.18s ease, box-shadow 0.25s ease, background-position 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
 
-@keyframes rippleAnim {
-  to {
-    transform: scale(2.5);
-    opacity: 0;
-  }
-}
- 
-  .btn svg {
-    width: 17px;
-    height: 17px;
-    stroke: currentColor;
-    fill: none;
-    stroke-width: 2.4;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
+        .btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.42), transparent);
+            transition: left 0.6s ease;
+        }
 
-  /* ---------- TRUST ROW ---------- */
-  .trust {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 7px;
-    margin-top: 18px;
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text-muted);
-    letter-spacing: 0.3px;
-  }
+        .btn:hover {
+            transform: translateY(-2px);
+            background-position: 100% 50%;
+            box-shadow:
+                0 20px 36px -10px rgba(225, 29, 46, 0.95),
+                inset 0 1px 0 rgba(255, 255, 255, 0.35);
+        }
 
-  .trust svg {
-    width: 13px;
-    height: 13px;
-    stroke: var(--red);
-    fill: none;
-    stroke-width: 2.2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
+        .btn:hover::after {
+            left: 130%;
+        }
 
-  /* ---------- FOOTER STRIP ---------- */
-  .card-footer {
-    margin-top: 30px;
-    margin-left: -30px;
-    margin-right: -30px;
-    padding: 16px 20px;
-    background: linear-gradient(180deg, #fdf7f8, #fbeeef);
-    border-top: 1px solid rgba(225, 29, 46, 0.14);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 18px;
-  }
+        .btn:active {
+            transform: translateY(0) scale(0.985);
+        }
 
-  .card-footer .item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 9.5px;
-    font-weight: 800;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: #a8a8b4;
-  }
+        /* ---------- RIPPLE EFFECT ---------- */
+        .btn .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.55);
+            transform: scale(0);
+            animation: rippleAnim 0.7s ease-out;
+            pointer-events: none;
+        }
 
-  .card-footer .item svg {
-    width: 13px;
-    height: 13px;
-    stroke: var(--red);
-    fill: none;
-    stroke-width: 2.2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    opacity: 0.85;
-  }
+        @keyframes rippleAnim {
+            to {
+                transform: scale(2.5);
+                opacity: 0;
+            }
+        }
 
-  .card-footer .sep {
-    width: 1px;
-    height: 14px;
-    background: rgba(225, 29, 46, 0.2);
-  }
+        .btn svg {
+            width: 17px;
+            height: 17px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2.4;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
 
-  /* ---------- RESPONSIVE ---------- */
-  @media (max-width: 420px) {
-    .card { padding: 34px 22px 0; border-radius: 22px; }
-    .card-footer { margin-left: -22px; margin-right: -22px; padding: 15px 14px; gap: 12px; }
-    .logo { width: 82px; height: 82px; }
-    .logo span { font-size: 30px; }
-    h1 { font-size: 23px; }
-    .card-footer .item { font-size: 8.5px; letter-spacing: 0.6px; }
-  }
-</style>
+        /* ---------- TRUST ROW ---------- */
+        .trust {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            margin-top: 18px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.3px;
+        }
+
+        .trust svg {
+            width: 13px;
+            height: 13px;
+            stroke: var(--red);
+            fill: none;
+            stroke-width: 2.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* ---------- FOOTER STRIP ---------- */
+        .card-footer {
+            margin-top: 30px;
+            margin-left: -30px;
+            margin-right: -30px;
+            padding: 16px 20px;
+            background: linear-gradient(180deg, #fdf7f8, #fbeeef);
+            border-top: 1px solid rgba(225, 29, 46, 0.14);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+        }
+
+        .card-footer .item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 9.5px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #a8a8b4;
+        }
+
+        .card-footer .item svg {
+            width: 13px;
+            height: 13px;
+            stroke: var(--red);
+            fill: none;
+            stroke-width: 2.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            opacity: 0.85;
+        }
+
+        .card-footer .sep {
+            width: 1px;
+            height: 14px;
+            background: rgba(225, 29, 46, 0.2);
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 420px) {
+            .card {
+                padding: 34px 22px 0;
+                border-radius: 22px;
+            }
+
+            .card-footer {
+                margin-left: -22px;
+                margin-right: -22px;
+                padding: 15px 14px;
+                gap: 12px;
+            }
+
+            .logo {
+                width: 82px;
+                height: 82px;
+            }
+
+            .logo span {
+                font-size: 30px;
+            }
+
+            h1 {
+                font-size: 23px;
+            }
+
+            .card-footer .item {
+                font-size: 8.5px;
+                letter-spacing: 0.6px;
+            }
+        }
+    </style>
+
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1489052949743281');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=1489052949743281&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Code -->
+
 </head>
+
 <body>
 
-  <div class="glow"></div>
+    <div class="glow"></div>
 
-  <main class="card">
+    <main class="card">
 
-    <!-- LOGO -->
-    <div class="logo">
-      <span>91</span>
-      <small>CLUB</small>
-    </div>
+        <!-- LOGO -->
+        <div class="logo">
+            <span>91</span>
+            <small>CLUB</small>
+        </div>
 
-    <!-- BADGE -->
-    <div class="badge">
-      <span class="dot"></span>
-      Premium Access
-    </div>
+        <!-- BADGE -->
+        <div class="badge">
+            <span class="dot"></span>
+            Premium Access
+        </div>
 
-    <!-- HEADING -->
-    <h1>Exclusive <em>Members</em> Only</h1>
-    <p class="sub">
-      Verified access for elite players. Enter the private lobby and unlock your premium experience.
-    </p>
+        <!-- HEADING -->
+        <h1>Exclusive <em>Members</em> Only</h1>
+        <p class="sub">
+            Verified access for elite players. Enter the private lobby and unlock your premium experience.
+        </p>
 
-    <!-- DIVIDER -->
-    <div class="divider"><span>Verified Entry</span></div>
+        <!-- DIVIDER -->
+        <div class="divider"><span>Verified Entry</span></div>
 
-    <!-- BUTTON -->
-    <a href="#" class="btn" id="joinBtn">
-      Enter Now </a>
+        <!-- BUTTON -->
+        <a href="#" class="btn" id="joinBtn">
+            Enter Now </a>
 
-    <!-- TRUST -->
-    <div class="trust">
-      <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      256-bit secure encrypted connection
-    </div>
+        <!-- TRUST -->
+        <div class="trust">
+            <svg viewBox="0 0 24 24">
+                <rect x="3" y="11" width="18" height="11" rx="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+            </svg>
+            256-bit secure encrypted connection
+        </div>
 
-    <!-- FOOTER -->
-    <div class="card-footer">
-      <div class="item">
-        <svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 3.4 9.2 8 10 4.6-.8 8-5 8-10V6l-8-4z"/></svg>
-        SSL Secured
-      </div>
-      <div class="sep"></div>
-      <div class="item">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-        24/7 Support
-      </div>
-      <div class="sep"></div>
-      <div class="item">
-        <svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>
-        Verified
-      </div>
-    </div>
+        <!-- FOOTER -->
+        <div class="card-footer">
+            <div class="item">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2 4 6v6c0 5 3.4 9.2 8 10 4.6-.8 8-5 8-10V6l-8-4z" />
+                </svg>
+                SSL Secured
+            </div>
+            <div class="sep"></div>
+            <div class="item">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="9" />
+                    <path d="M12 7v5l3 2" />
+                </svg>
+                24/7 Support
+            </div>
+            <div class="sep"></div>
+            <div class="item">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 6 9 17l-5-5" />
+                </svg>
+                Verified
+            </div>
+        </div>
 
-  </main>
+    </main>
 
-  <script>
+    <script>
         document.addEventListener('DOMContentLoaded', () => {
 
             // ---------- BUTTON ripple ----------
@@ -556,4 +643,5 @@
     </script>
 
 </body>
+
 </html>
