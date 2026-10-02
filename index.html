@@ -300,6 +300,23 @@
 
   .btn:active { transform: translateY(0) scale(0.985); }
 
+ /* ---------- RIPPLE EFFECT ---------- */
+.btn .ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+  transform: scale(0);
+  animation: rippleAnim 0.7s ease-out;
+  pointer-events: none;
+}
+
+@keyframes rippleAnim {
+  to {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+ 
   .btn svg {
     width: 17px;
     height: 17px;
@@ -415,9 +432,7 @@
 
     <!-- BUTTON -->
     <a href="#" class="btn" id="joinBtn">
-      Enter Now
-      <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </a>
+      Enter Now </a>
 
     <!-- TRUST -->
     <div class="trust">
